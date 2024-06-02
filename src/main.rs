@@ -1,14 +1,13 @@
-use std::{
-    io::{stdin, stdout, Write},
-    process::Command, path::Path, env};
+use std::io::stdin;
+use std::process::Command;
+use std::path::Path;
+use std::env;
+
+mod prompt;
 
 fn main(){
     loop {
-        print!("{} > ", env::current_dir().unwrap().into_os_string().into_string().unwrap().trim_matches('"'));
-        match stdout().flush() {
-            Ok(_) => (),
-            Err(error) => println!("{}", error),
-        }
+        prompt::print_prompt();
 
         let mut input = String::new();
         stdin().read_line(&mut input).unwrap();
